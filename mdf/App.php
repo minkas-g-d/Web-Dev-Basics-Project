@@ -2,13 +2,13 @@
 
 namespace MDF;
 
-
+include_once 'Loader.php';
 class App {
 
     private static $_instance = null;
 
-    private function __constructor() {
-
+    private function __construct() {
+        \MDF\Loader::registerAutoload();
     }
 
     public function run() {
