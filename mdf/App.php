@@ -4,12 +4,16 @@ namespace MDF;
 
 
 class App {
+
     private static $_instance = null;
+
+    private function __constructor() {
+
+    }
 
     public function run() {
         echo 'running';
     }
-
 
     /*
      * @return MDF/App
