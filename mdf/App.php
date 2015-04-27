@@ -8,6 +8,7 @@ class App {
     private static $_instance = null;
 
     private function __construct() {
+        \MDF\Loader::registerNamespace('MDF', dirname(__FILE__) . DIRECTORY_SEPARATOR);
         \MDF\Loader::registerAutoload();
     }
 
