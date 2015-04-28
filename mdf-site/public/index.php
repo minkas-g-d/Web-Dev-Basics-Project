@@ -1,4 +1,6 @@
 <?php
+error_reporting(E_ALL ^ E_NOTICE);
+
 include '../../mdf/App.php';
 
 $app = \MDF\App::getInstance();
@@ -9,3 +11,5 @@ $app = \MDF\App::getInstance();
 // Test setConfigFolder
 $config = \MDF\Config::getInstance();
 $config->setConfigFolder('../config');
+
+$config->app;

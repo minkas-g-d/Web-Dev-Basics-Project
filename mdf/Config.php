@@ -22,10 +22,43 @@ class Config {
             $this->_configArray = array();
             $this->_configFolder = $_configFolder . DIRECTORY_SEPARATOR;
         } else {
-            throw new \Exception('Could not read config folder.');
+            throw new \Exception('Could not read config folder '.$_configFolder.'!');
         }
 
-        echo $this->_configFolder;
+        //echo $this->_configFolder;
+    }
+
+    public function includeConfigFile($path) {
+        if(!$path) {
+            throw new \Exception('Path to config file not provided');
+        }
+
+        $file = realpath($path);
+
+        if($file && is_file($file) && is_readable($file)) {
+            //get the filename
+            $fileName = explode('.php', basename($file))[0];
+            $this->_configArray[$fileName] = include $file;
+            print_r($this->_configArray);
+        } else {
+            throw new \Exception('Could not open file '.$file.'!');
+        }
+
+        return null;
+    }
+
+
+    public function __get($name) {
+        if(!$this->_configArray[$name]) {
+            //TODO
+            $this->includeConfigFile($this->_configFolder . $name . '.php');
+        }
+
+        if(array_key_exists($name, $this->_configArray)) {
+            return $this->_configArray[$name];
+        }
+
+        return null;
     }
 
     public static function getInstance() {
