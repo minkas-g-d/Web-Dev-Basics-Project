@@ -10,6 +10,10 @@ class Config {
     private function __construct() {
     }
 
+    public function getConfigFolder() {
+        return $this->_configFolder;
+    }
+
     public function setConfigFolder($configFolder) {
         if(!$configFolder) {
             throw new \Exception('Config folder is empty.');
@@ -21,6 +25,10 @@ class Config {
             // clear old config data
             $this->_configArray = array();
             $this->_configFolder = $_configFolder . DIRECTORY_SEPARATOR;
+//            $namespaces = $this->app['namespaces'];
+//            if(is_array($namespaces)) {
+//                \MDF\Loader::registerNamespace($namespaces, $path);
+//            }
         } else {
             throw new \Exception('Could not read config folder '.$_configFolder.'!');
         }
@@ -39,7 +47,6 @@ class Config {
             //get the filename
             $fileName = explode('.php', basename($file))[0];
             $this->_configArray[$fileName] = include $file;
-            print_r($this->_configArray);
         } else {
             throw new \Exception('Could not open file '.$file.'!');
         }
