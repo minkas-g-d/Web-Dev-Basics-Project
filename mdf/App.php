@@ -34,10 +34,9 @@ class App {
         if(!$this->getConfigFolder()) {
             $this->setConfigFolder('../config');
         }
-        
+
         $this->_frontController = \MDF\FrontController::getInstance();
         $this->_frontController->dispatch();
-
     }
 
     /*
