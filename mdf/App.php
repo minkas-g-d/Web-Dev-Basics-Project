@@ -7,6 +7,7 @@ class App {
 
     private static $_instance = null;
     private $_config = null;
+    private $_frontController = null;
 
     private function __construct() {
         \MDF\Loader::registerNamespace('MDF', dirname(__FILE__) . DIRECTORY_SEPARATOR);
@@ -33,6 +34,10 @@ class App {
         if(!$this->getConfigFolder()) {
             $this->setConfigFolder('../config');
         }
+        
+        $this->_frontController = \MDF\FrontController::getInstance();
+        $this->_frontController->dispatch();
+
     }
 
     /*
