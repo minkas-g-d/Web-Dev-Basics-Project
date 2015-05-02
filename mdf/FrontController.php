@@ -9,22 +9,7 @@ class FrontController {
     // decides which router should be invoked
     public function dispatch() {
         $test = new \MDF\Routers\DefaultRouter();
-        $test->parse();
-
-        $controller = $test->getController();
-        if($controller == null) {
-            $controller = $this->getDefaultController();
-        }
-        $method = $test->getMethod();
-        if($method == null) {
-            $method = $this->getDefaultMethod();
-        }
-
-        echo $controller;
-        echo '<br>';
-        echo $method;
-
-
+        echo  $test->getURI();
     }
 
     public function getDefaultController() {
