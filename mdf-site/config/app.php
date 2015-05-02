@@ -1,6 +1,6 @@
 <?php
 
-$cnf['key1'] = 'value1';
-$cnf['key2'] = 'value2';
+$cnf['default_controller'] = 'Index';
+$cnf['default_method'] = 'index';
 
 return $cnf;

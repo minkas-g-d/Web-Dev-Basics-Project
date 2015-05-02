@@ -39,8 +39,8 @@ class DefaultRouter {
             }
         }
 
-        echo 'controller: '. $this->_controller . '<br>' . 'method: ' . $this->_method;
-        var_dump($this->_params);
+        //echo 'controller: '. $this->_controller . '<br>' . 'method: ' . $this->_method;
+        //var_dump($this->_params);
     }
 
     public function getController() {
