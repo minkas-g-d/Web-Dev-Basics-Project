@@ -25,6 +25,7 @@ class Config {
             // clear old config data
             $this->_configArray = array();
             $this->_configFolder = $_configFolder . DIRECTORY_SEPARATOR;
+
             $namespaces = $this->app['namespaces'];
             if(is_array($namespaces)) {
                 \MDF\Loader::registerNamespaces($namespaces);
