@@ -9,12 +9,21 @@ class FrontController {
     private $_controller = null;
     private $_method = null;
     private $_params = array();
+    private $_router = null;
 
-    // decides which router should be invoked
+    // loads specific controller and method provided in URI
     public function dispatch() {
-        $test = new \MDF\Routers\DefaultRouter();
-        $uri = $test->getURI();
-        //echo $uri;
+        // Move router initialization in App class
+        // to give chance to choose different routers for the framework
+        //$test = new \MDF\Routers\DefaultRouter();
+        //$uri = $test->getURI();
+
+        if($this->_router == null) {
+            throw new \Exception('Router not provided!');
+        }
+
+        $uri = $this->_router->getURI();
+
         $routes = \MDF\App::getInstance()->getConfig()->routes;
 
         $router_cache = null;
@@ -66,20 +75,21 @@ class FrontController {
             }
         }
 
-//        echo 'router_cache: ';
         var_dump($router_cache);
-//        echo '<br>';
-//        echo 'Controller: ' . $this->_controller;
-//        echo '<br>';
-//        echo 'Method: ' . $this->_method;
-//        echo '<br>Params: ';
-//        var_dump($this->_params);
 
         $controller_to_load = $this->_ns.'\\' . ucfirst($this->_controller);
         echo $controller_to_load;
         $newController = new $controller_to_load;
         var_dump($newController);
         $newController->{$this->_method}();
+    }
+
+    public function getRouter() {
+        return $this->_router;
+    }
+
+    public function setRouter(\MDF\Routers\IRouters  $router) {
+        $this->_router = $router;
     }
 
     public function getDefaultController() {
