@@ -7,5 +7,4 @@ $app = \MDF\App::getInstance();
 
 $app->run();
 
-// Test getting config file
-//echo $app->getConfig()->app;
+//echo '<br>'. $_SERVER['DOCUMENT_ROOT'];
