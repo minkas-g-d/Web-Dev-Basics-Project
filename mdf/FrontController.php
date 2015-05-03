@@ -75,12 +75,12 @@ class FrontController {
             }
         }
 
-        var_dump($router_cache);
-
+        //var_dump($router_cache);
+        // TODO fix the situation when method or controller does not exit
         $controller_to_load = $this->_ns.'\\' . ucfirst($this->_controller);
-        echo $controller_to_load;
+        //echo $controller_to_load;
         $newController = new $controller_to_load;
-        var_dump($newController);
+        //var_dump($newController);
         $newController->{$this->_method}();
     }
 
