@@ -30,7 +30,7 @@ final class Loader {
                 if($file && is_readable($file)) {
                     include $file;
                 } else {
-                    throw new \Exception('Cannot include file: ' . $file . '!');
+                    throw new \Exception('Cannot include file!');
                 }
             }
         }

@@ -42,9 +42,9 @@ class FrontController {
 
         $params = explode('/', $uri);
         if($params[0]) {
-            $this->_controller = $params[0];
+            $this->_controller = strtolower($params[0]);
             if($params[1]) {
-                $this->_method = $params[1];
+                $this->_method = strtolower($params[1]);
                 unset($params[0],$params[1]);
                 if(count($params) > 0) {
                     $this->_params = array_values($params);
@@ -57,19 +57,17 @@ class FrontController {
             $this->_method = $this->getDefaultMethod();
         }
 
-        if(is_array($router_cache) && $router_cache['controllers'] && $router_cache['controllers'][$this->_controller]['to']) {
-            $this->_controller = $router_cache['controllers'][$this->_controller]['to'];
-            if($router_cache['controllers'][$this->_controller]['methods']) {
-                $this->_method = $router_cache['controllers'][$this->_controller]['methods'][$this->_method];
-            } else {
-                $this->_method = $this->getDefaultMethod();
+        if(is_array($router_cache) && $router_cache['controllers']) {
+            if($router_cache['controllers'][$this->_controller]['methods'][$this->_method]) {
+                $this->_method = strtolower($router_cache['controllers'][$this->_controller]['methods'][$this->_method]);
             }
-        } else {
-            $this->_controller = $this->getDefaultController();
+            if(isset($router_cache['controllers'][$this->_controller]['to'])) {
+                $this->_controller = strtolower($router_cache['controllers'][$this->_controller]['to']);
+            }
         }
 
 //        echo 'router_cache: ';
-//        var_dump($router_cache);
+        var_dump($router_cache);
 //        echo '<br>';
 //        echo 'Controller: ' . $this->_controller;
 //        echo '<br>';
@@ -87,15 +85,15 @@ class FrontController {
     public function getDefaultController() {
         $controller = \MDF\App::getInstance()->getConfig()->app['default_controller'];
         if ($controller) {
-            return $controller;
+            return strtolower($controller);
         }
-        return 'Index';
+        return 'index';
     }
 
     public function getDefaultMethod() {
         $method = \MDF\App::getInstance()->getConfig()->app['default_method'];
         if($method) {
-            return $method;
+            return strtolower($method);
         }
         return 'index';
     }
