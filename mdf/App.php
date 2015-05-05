@@ -9,6 +9,7 @@ class App {
     private $_config = null;
     private $_frontController = null;
     private $_router = null;
+    private $_dbConnections = array();
 
     private function __construct() {
         \MDF\Loader::registerNamespace('MDF', dirname(__FILE__) . DIRECTORY_SEPARATOR);
@@ -44,6 +45,31 @@ class App {
         }
 
         $this->_frontController->dispatch();
+    }
+
+    public function getConnection($connection = 'default') {
+        if(!$connection) {
+            throw new \Exception('No connection identifier provided.', 500);
+        }
+
+        if($this->_dbConnections[$connection]) {
+            return $this->_dbConnections[$connection];
+        }
+
+        $cnf = $this->getConfig()->database;
+        if(!$cnf[$connection]) {
+            throw new \Exception('No details for establishing connection provided in db config.', 500);
+        }
+
+        try {
+            $DBH = new \PDO($cnf[$connection]['connection_string'], $cnf[$connection]['username'],
+                $cnf[$connection]['password'], $cnf[$connection]['options']);
+            $this->_dbConnections[$connection] = $DBH;
+        } catch (\PDOException $e) {
+            echo $e->getMessage(); exit;
+        }
+
+        return $DBH;
     }
 
     public function getRouter()
