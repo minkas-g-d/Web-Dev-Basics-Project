@@ -6,5 +6,10 @@ include '../../mdf/App.php';
 $app = \MDF\App::getInstance();
 $app->setRouter('DefaultRouter');
 $app->run();
-//$app->getConnection('default');
+
+// DB test
+//$db = new \MDF\DB\SimpleDB();
+//$result = $db->prepare('SELECT * FROM users WHERE id=?', array(2))->execute()->fetchAllAssoc();
+//var_dump($result);
+
 //echo '<br>'. $_SERVER['DOCUMENT_ROOT'];
