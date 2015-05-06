@@ -46,7 +46,7 @@ class View {
     public function display($name, $data = array(), $returnAsString = false) {
 
         if(is_array($data)) {
-            array_merge($data, $this->data);
+            $this->data = array_merge($data, $this->data);
         }
 
         if($returnAsString) {
