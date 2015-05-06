@@ -10,6 +10,8 @@ class View {
     private $viewDir = null;
     private $data = array();
     private $extension = '.php';
+    private $layoutParts = array();
+    private $layoutData = array();
 
     private function __construct() {
         $this->viewPath = \MDF\App::getInstance()->getConfig()->app['viewsDirectory'];
@@ -49,12 +51,33 @@ class View {
             $this->data = array_merge($data, $this->data);
         }
 
+        if(count($this->layoutParts) > 0) {
+            foreach($this->layoutParts as $key => $layout) {
+                $renderedLayout = $this->_includeFile($layout);
+                if($renderedLayout) {
+                    $this->layoutData[$key] = $renderedLayout;
+                }
+            }
+        }
+
         if($returnAsString) {
             return $this->_includeFile($name);
         } else {
             echo $this->_includeFile($name);
         }
 
+    }
+
+    public function appendToLayout($key, $template) {
+        if($key && $template) {
+            $this->layoutParts[$key] = $template;
+        } else {
+            throw new \Exception('Invalid key and template provided for layout!');
+        }
+    }
+
+    public function getLayoutData($key) {
+        return $this->layoutData[$key];
     }
 
     private function _includeFile($file) {
