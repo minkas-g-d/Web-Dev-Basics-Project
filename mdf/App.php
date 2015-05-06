@@ -10,6 +10,7 @@ class App {
     private $_frontController = null;
     private $_router = null;
     private $_dbConnections = array();
+    private $_session = null;
 
     private function __construct() {
         \MDF\Loader::registerNamespace('MDF', dirname(__FILE__) . DIRECTORY_SEPARATOR);
@@ -44,9 +45,32 @@ class App {
             $this->_frontController->setRouter(new \MDF\Routers\DefaultRouter());
         }
 
+
+        $sess = $this->_config->app['session'];
+        // Check if we should start session right away
+        if($sess['autostart']) {
+            // Check which type of session is configured to be used and instantiate it
+            // Have only native php session for now
+            // TODO add dbSession in the future
+            if($sess['type'] == 'native') {
+                $s = new \MDF\Session\NativeSession($sess['name'], $sess['lifetime'],
+                    $sess['path'], $sess['domain'], $sess['security']);
+            } else {
+                throw new \Exception('Unknown session type!');
+            }
+            // Provide chance for the programmer to set his own session type
+            $this->setSession($s);
+
+        }
+
         $this->_frontController->dispatch();
     }
 
+    /**
+     * @param string $connection
+     * @return \PDO
+     * @throws \Exception
+     */
     public function getDBConnection($connection = 'default') {
         if(!$connection) {
             throw new \Exception('No connection identifier provided.', 500);
@@ -72,6 +96,9 @@ class App {
         return $DBH;
     }
 
+    /**
+     * @return \MDF\Routers\IRouter
+     */
     public function getRouter()
     {
         return $this->_router;
@@ -80,6 +107,20 @@ class App {
     public function setRouter($router)
     {
         $this->_router = $router;
+    }
+
+    /**
+     * @return \MDF\Session\ISession
+     */
+    public function getSession() {
+        return $this->_session;
+    }
+
+    /**
+     * @param \MDF\Session\ISession $session
+     */
+    public function setSession(\MDF\Session\ISession $session) {
+        $this->_session = $session;
     }
 
     /*

@@ -7,6 +7,10 @@ $app = \MDF\App::getInstance();
 $app->setRouter('DefaultRouter');
 $app->run();
 
+$s = $app->getSession();
+$s->count+=1;
+echo $s->count;
+
 // DB test
 //$db = new \MDF\DB\SimpleDB();
 //$result = $db->prepare('SELECT * FROM users WHERE id=?', array(2))->execute()->fetchAllAssoc();
