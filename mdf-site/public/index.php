@@ -7,9 +7,11 @@ $app = \MDF\App::getInstance();
 $app->setRouter('DefaultRouter');
 $app->run();
 
-$s = $app->getSession();
-$s->count+=1;
-echo $s->count;
+
+// Test session
+//$s = $app->getSession();
+//$s->count+=1;
+//echo $s->count;
 
 // DB test
 //$db = new \MDF\DB\SimpleDB();
