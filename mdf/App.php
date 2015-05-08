@@ -137,7 +137,7 @@ class App {
         return self::$_instance;
     }
 
-    public function _exceptionHandler(\Exception $ex) {
+    public function exceptionHandler(\Exception $ex) {
         if ($this->_config && $this->_config->app['displayExceptions'] == true) {
             echo '<pre>' . print_r($ex, true) . '</pre>';
         } else {
