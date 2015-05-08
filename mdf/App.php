@@ -13,6 +13,7 @@ class App {
     private $_session = null;
 
     private function __construct() {
+        set_exception_handler(array($this, 'exceptionHandler'));
         \MDF\Loader::registerNamespace('MDF', dirname(__FILE__) . DIRECTORY_SEPARATOR);
         \MDF\Loader::registerAutoload();
         $this->_config = \MDF\Config::getInstance();
@@ -134,5 +135,24 @@ class App {
         }
 
         return self::$_instance;
+    }
+
+    public function _exceptionHandler(\Exception $ex) {
+        if ($this->_config && $this->_config->app['displayExceptions'] == true) {
+            echo '<pre>' . print_r($ex, true) . '</pre>';
+        } else {
+            $this->displayError($ex->getCode());
+        }
+    }
+
+    public function displayError($error) {
+        try {
+            $view = \MDF\View::getInstance();
+            $view->display('errors.' . $error);
+        } catch (\Exception $exc) {
+            \MDF\Common::headerStatus($error);
+            echo '<h1>' . $error . '</h1>';
+            exit;
+        }
     }
 }

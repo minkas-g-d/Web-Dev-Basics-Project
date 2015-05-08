@@ -9,6 +9,9 @@ class FrontController {
     private $_controller = null;
     private $_method = null;
     private $_params = array();
+    /**
+     * @var \MDF\Routers\IRouters
+     */
     private $_router = null;
 
     // loads specific controller and method provided in URI
@@ -49,15 +52,15 @@ class FrontController {
             throw new \Exception('No default controller provided!');
         }
 
+        $inputData = \MDF\InputData::getInstance();
         $params = explode('/', $uri);
         if($params[0]) {
             $this->_controller = strtolower($params[0]);
             if($params[1]) {
                 $this->_method = strtolower($params[1]);
                 unset($params[0],$params[1]);
-                if(count($params) > 0) {
-                    $this->_params = array_values($params);
-                }
+                $this->_params = array_values($params);
+                $inputData->setGet($this->_params);
             } else {
                 $this->_method = $this->getDefaultMethod();
             }
@@ -75,8 +78,9 @@ class FrontController {
             }
         }
 
+        $inputData->setPost($this->_router->getPost());
         //var_dump($router_cache);
-        // TODO fix the situation when method or controller does not exit
+        // TODO fix the situation when method or controller does not exist
         $controller_to_load = $this->_ns.'\\' . ucfirst($this->_controller);
         //echo $controller_to_load;
         $newController = new $controller_to_load;

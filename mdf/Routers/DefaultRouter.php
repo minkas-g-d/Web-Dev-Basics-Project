@@ -18,4 +18,8 @@ class DefaultRouter implements \MDF\Routers\IRouters {
         return substr($_SERVER['PHP_SELF'], strlen($_SERVER['SCRIPT_NAME']) + 1);
     }
 
+    public function getPost()
+    {
+        return $_POST;
+    }
 }

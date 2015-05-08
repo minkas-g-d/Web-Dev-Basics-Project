@@ -13,5 +13,6 @@ $cnf['session']['path'] = '/';
 $cnf['session']['domain'] = '';
 $cnf['session']['security'] = false;
 
+$cnf['displayExceptions'] = true;
 
 return $cnf;
