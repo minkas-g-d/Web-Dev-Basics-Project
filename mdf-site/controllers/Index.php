@@ -2,10 +2,8 @@
 
 namespace Controllers;
 
-class Index {
+class Index extends \MDF\BaseController {
     public function index() {
-
-        $view = \MDF\View::getInstance();
 
         // Test Validator
         //$validator = new \MDF\Validator();
@@ -13,7 +11,7 @@ class Index {
         //print_r($validator->getErrors());
         //var_dump(\MDF\Validator::email('mina.dodunekova@gmail.com'));
 
-        $view->appendToLayout('body', 'index');
-        $view->display('layouts.default', array('username'=> 'Mina'));
+        $this->view->appendToLayout('body', 'index');
+        $this->view->display('layouts.default', array('username'=> 'Mina'));
     }
 }

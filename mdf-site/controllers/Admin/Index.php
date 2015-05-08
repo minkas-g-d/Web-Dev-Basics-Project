@@ -2,11 +2,10 @@
 
 namespace Controllers\Admin;
 
-class Index {
+class Index extends \MDF\BaseController{
 
     public function index() {
-        $view = \MDF\View::getInstance();
-        $view->display('admin.index');
+        $this->view->display('admin.index');
     }
 
     public function profile() {
