@@ -9,9 +9,9 @@ $app->run();
 
 
 // Test session
-//$s = $app->getSession();
-//$s->count+=1;
-//echo $s->count;
+$s = $app->getSession();
+$s->count+=1;
+echo $s->count;
 
 // DB test
 //$db = new \MDF\DB\SimpleDB();
