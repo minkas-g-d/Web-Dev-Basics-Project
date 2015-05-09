@@ -6,7 +6,7 @@ namespace Controllers;
 class Posts extends \MDF\BaseController {
 
     public function index() {
-        $postsModel = new \Models\PostsModel();
+        $postsModel = new \Models\Posts();
         $posts = $postsModel->listPartialInfo();
 
         $this->view->appendToLayout('body', 'blog');
@@ -19,7 +19,7 @@ class Posts extends \MDF\BaseController {
             $this->index(); exit;
         }
 
-        $postsModel = new \Models\PostsModel();
+        $postsModel = new \Models\Posts();
 
         try{
             $post = $postsModel->getPost($args[0]);

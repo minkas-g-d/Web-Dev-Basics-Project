@@ -5,7 +5,7 @@ namespace Models;
 use MDF\Common;
 use MDF\Validator;
 
-class PostsModel extends \MDF\BaseModel {
+class Posts extends \MDF\BaseModel {
 
     public function listFullInfo() {
         return $this->db->prepare('SELECT * FROM mdf_posts ORDER BY post_date DESC')->execute()->fetchAllAssoc();

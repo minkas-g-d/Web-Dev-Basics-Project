@@ -7,7 +7,7 @@ use MDF\BaseModel;
 class Index extends \MDF\BaseController {
 
     public function index() {
-        $postsModel = new \Models\PostsModel();
+        $postsModel = new \Models\Posts();
         $posts = $postsModel->listPartialInfo();
 
         $this->view->appendToLayout('body', 'index');
