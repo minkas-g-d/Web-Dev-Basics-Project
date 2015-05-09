@@ -9,4 +9,6 @@ $cnf['administration']['controllers']['index']['methods']['user'] = 'profile';
 $cnf['administration']['controllers']['new']['to'] = 'create';
 //Default situation -> URI '/'
 $cnf['*']['namespace'] = 'Controllers';
+$cnf['*']['controllers']['posts']['index']['to'] = 'index';
+$cnf['*']['controllers']['posts']['methods']['view'] = 'view';
 return $cnf;

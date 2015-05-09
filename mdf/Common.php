@@ -6,7 +6,7 @@ namespace MDF;
 class Common {
     public static function normalize($data, $types) {
         $types = explode('|', $types);
-        var_dump($types);
+        //var_dump($types);
         if(is_array($types)) {
             foreach($types as $type) {
                 if($type == 'int') {

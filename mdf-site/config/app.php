@@ -3,6 +3,7 @@
 $cnf['default_controller'] = 'Index';
 $cnf['default_method'] = 'index';
 $cnf['namespaces']['Controllers'] = 'C:/xampp/htdocs/web-dev-basics-project/mdf-site/controllers/';
+$cnf['namespaces']['Models'] = 'C:/xampp/htdocs/web-dev-basics-project/mdf-site/models/';
 
 $cnf['session']['autostart'] = true;
 $cnf['session']['type'] = 'native';

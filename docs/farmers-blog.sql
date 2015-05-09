@@ -1,0 +1,44 @@
+use mvc;
+SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+
+CREATE TABLE IF NOT EXISTS `mdf_users` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `username` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `pass_hash` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `is_admin` bit(1) NOT NULL DEFAULT b'0', 
+  `firstname` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `lastname` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `registered` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`ID`),
+  UNIQUE KEY `username_UNIQUE` (`username`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=2;
+
+INSERT INTO `mdf_users` VALUES (4,'alla-pogachova', '1234', 0, 'Alina', 'Petkova', 'alla-p@abv.bg', now());
+(1, 'minkas_g_d', '1234', 0, 'Mina', 'Dodunekova', 'md@mido.com', now()), 
+(2, 'pepito', '1234', 0, 'Pepi', 'Pepistia', 'pepi@abv.com', now()),
+(3, 'mara', '1234', 0, 'Mariika', 'Podobnata', 'mara@abv.com', now());
+
+CREATE TABLE IF NOT EXISTS `mdf_posts` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `author_id` int(11) unsigned NOT NULL DEFAULT '0',
+  `title` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `content` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `excerpt` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `post_image` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `post_date` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `post_modified` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `post_status` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'published',
+  `post_category_id` int(11) unsigned NOT NULL DEFAULT '0',
+  PRIMARY KEY (`ID`),
+  CONSTRAINT `fk_posts_users` FOREIGN KEY (`author_id`) REFERENCES `mdf_users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=10 ;
+
+
+INSERT INTO `mdf_posts` VALUES (1, 3, 'Smelling of garlic...and Roses', 'Here in the Valley of the Roses, there are some heavenly scents wafting around in the spring and early summer. From the delicate scent of roses (for rose oil), to the all-pervasive lime flowers and lavender in June. And now, garlic. Our garlic is hand planted, hand watered, weeded, hand dug and hand processed. We use no synthetic fertilisers or chemicals. Growing is organic but not certified (couldn\'t afford to fee to begin the process this year, but hoping after this year\'s harvest we will be able to). Where the garlic needed a boost in the spring, we sprayed seaweed-based organic foliar feed, and we used neem oil for pest control and plant health. This is many times more labour intensive and costly than the \'conventional\' approach, which is to apply loads of NPK to the land and synthetic pyrethrins for bugs, but we feel very strongly about being good guardians of ourenvironment and treading lightly in all we do.', 'From the delicate scent of roses (for rose oil), to the all-pervasive lime flowers and lavender in June. And now, garlic.', '', now(), '0000-00-00 00:00:00', 'published', 0), (2, 2, 'Days of thunder', '<p>Spring in the Rose Valley is very atmospheric. Sultry, hot dog days when the heat and pressure builds and builds...and then, as if God or whoever just goes \'ENOUGH...AHHHHHHH\' it pisses down with a vengeance. Big booms of thunder, frighteningly close lightning strikes. Woweee. It must surely be good for all the things growing quietly out in the field (don\'t you remember from biology lessons, how lightning is a nitrogen fixer...)</p>
+<p>This year we are thankful we managed to apply a rather thick layer of straw mulch in the field. The stormy weather and spring rain encourages lots of weed growth too! Still, lots of delicate work weeding the extra keen weeds gently out, spraying organic neem and compost teas that smell like poo but are really only made of nettles and dandelion.</p>
+<p>Not long now, we whisper to the garlic, bulbs getting stronger, thicker and more voluptuous underground. Not long now my dears.</p>','Spring in the Rose Valley is very atmospheric. Sultry, hot dog days when the heat and pressure builds and builds...', '', now(), '0000-00-00 00:00:00', 'published', 0);
+
+
+INSERT INTO `mvc`.`mdf_posts` (`author_id`, `title`, `content`, `excerpt`, `post_date`) VALUES (1, 'Willow expedition', '<p>Bordering one of our blocks, we have an irrigation channel full of willow trees (I\'m not sure what variety). At this time of year they make a beautiful earthy contrast to the snow all around. We experimented last year with using this willow to try to build some structures (a willowwam and a bit of a fence) in the field, but we came up against a lack of readily available water.</p>\n<p>\nNext time we try this, we\'ll know to dig the willow in deeper underground, and give it loads of water to get established. I also think that allowing the cut branches to stand in water for a while before planting will encourage root formation.Anyway, Milla and I went out to the field yesterday to cut some small bits of willow - not for planting, but to make some rooting water. While Milla was busy drawing pictures in the snow, I snipped some small pre-bud branches on an angle until I had a shopping bag full.</p><p>I put the cut branches into a container with some rainwater and spring water and...will leave them standing in the bathroom so they don\'t freeze solid outside. The aim is to get the magic rooting magicky ingredients (erm...rooting hormones?) out of the willow branches and infused into the water, so then we can use the water to stick other cuttings in and, hopefully, get them to root. We are thinking lots about trees at the moment, and I reckon some of our mulberry and aronia will be ripe for cutting soon.</p>', '<p>The aim is to get the magic rooting magicky ingredients (erm...rooting hormones?) out of the willow branches and infused into the water, so then we can use the water to stick other cuttings in and, hopefully, get them to root.</p>', '2015-03-15 13:33:23');
+INSERT INTO `mvc`.`mdf_posts` (`author_id`, `title`, `content`, `excerpt`, `post_date`) VALUES ('3', 'What to plant seeds in', '<p>So, it&#8217;s snowing again (depressing for 12 March) but at least we&#8217;re cracking on planting seedlings since we&#8217;ve given up waiting for the soil to warm up outside. Until we fix our barn roof and build the back wall, we don&#8217;t really have much in the way of greenhouse space and very few windowsills (note to Jo: when plastering in new windows, add windowsills, even if the rounded plaster is nice and organic and full of clay and straw. Erm, windowsills are KINDA USEFUL).</p><p>Juice cartons. Ahem. We actually recycled about a year&#8217;s worth of juice cartons because they were not being used for any creative project whatsoever. I&#8217;m talking about the big one litre ones. But, recently, I started cutting them open to make a neat little seed tray. They&#8217;re quite deep, you can prick holes in the bottom (or not) and keep the flap on as a cool reflector or lid while the seeds are germinating. Good for mustard and cress experiments too, cos you can fit quite a few of these babies on your windowsills (if you had any flipping windowsills).</p><p>About the seed raising mix: a mixture of worm castings, river sand and compost/peat (or ethical alternative) is good. Now, our worm farm was left outside by yours truly so all the little blighters died, but I&#8217;m hoping there are some eggs left to get them going again this year, so we&#8217;re short on that unless we buy it in. Sand: yes. That&#8217;s what the sandpit is for. The only problem is that until now it&#8217;s been totally frozen solid. Ditto the compost heap. We&#8217;re thinking that when we get the barn/greenhouse finished this would be a very good place to store the worm farm and aged compost. So, I cheated and am using a bought-in planting mix. I figure getting it done is the priority or we won&#8217;t have anything in the garden at all this year.</p>', '<p>Juice cartons. Ahem. We actually recycled about a year’s worth of juice cartons because they were not being used for any creative project whatsoever. I&#8217;m talking about the big one litre ones. But, recently, I started cutting them open to make a neat little seed tray. They’re quite deep, you can prick holes in the bottom (or not) and keep the flap on as a cool reflector or lid while the seeds are germinating. Good for mustard and cress experiments too, cos you can fit quite a few of these babies on your windowsills (if you had any flipping windowsills).</p>', '2015-04-22 22:13:11');
