@@ -74,6 +74,17 @@ class Common {
         return $data;
     }
 
+    public static function truncate($text,$num) {
+
+        if (strlen($text) > $num) {
+            $text = substr($text, 0, $num);
+            $text = substr($text,0,strrpos($text," "));
+            $etc = " ...";
+            $text = $text.$etc;
+        }
+        return $text;
+    }
+
     public static function headerStatus($code) {
         $codes = array(
             100 => 'Continue',

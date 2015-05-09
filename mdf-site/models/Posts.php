@@ -2,8 +2,6 @@
 
 namespace Models;
 
-use MDF\Common;
-use MDF\Validator;
 
 class Posts extends \MDF\BaseModel {
 
@@ -22,7 +20,7 @@ class Posts extends \MDF\BaseModel {
 
     public function getPost($id) {
 
-        if(Validator::numeric($id)) {
+        if(\MDF\Validator::numeric($id)) {
 
             $id = \MDF\Common::normalize($id,'int');
 
@@ -35,6 +33,18 @@ class Posts extends \MDF\BaseModel {
         } else {
             throw new \Exception('ID NOT VALID');
         }
+    }
+
+    public function addPost($authorId, $title, $content, $excerpt = null) {
+        if($excerpt == null) {
+            $excerpt = \MDF\Common::truncate($content, 150);
+        }
+        $result = $this->db->prepare('INSERT INTO mdf_posts (author_id, title, content, excerpt, post_date)
+          VALUES (?, ?, ?, ?, ?)',
+            array($authorId, $title, $content, $excerpt, date('Y-m-d H:i:s')))->execute()->getLastInsertedId();
+
+        return $result;
+
     }
 
 }
