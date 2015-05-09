@@ -85,7 +85,13 @@ class FrontController {
         //echo $controller_to_load;
         $newController = new $controller_to_load;
         //var_dump($newController);
-        $newController->{$this->_method}();
+        //var_dump($this->_params);exit;
+        if(count($this->_params) > 0) {
+            $newController->{$this->_method}($this->_params);
+        } else {
+            $newController->{$this->_method}();
+        }
+
     }
 
     public function getRouter() {
