@@ -2,17 +2,15 @@
 
 namespace Controllers;
 
+use MDF\BaseModel;
+
 class Index extends \MDF\BaseController {
 
     public function index() {
-
-        // Test Validator
-        //$validator = new \MDF\Validator();
-        //$validator->setRule('email', 'mina.dodunekova@gmail.com')->setRule('minlength', 3);
-        //print_r($validator->getErrors());
-        //var_dump(\MDF\Validator::email('mina.dodunekova@gmail.com'));
+        $postsModel = new \Models\PostsModel();
+        $posts = $postsModel->listPartialInfo();
 
         $this->view->appendToLayout('body', 'index');
-        $this->view->display('layouts.default', array('username'=> 'Mina'));
+        $this->view->display('layouts.default', array('posts' => $posts));
     }
 }

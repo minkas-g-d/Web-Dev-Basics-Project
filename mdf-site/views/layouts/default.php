@@ -1,23 +1,23 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-    <title>Verti by minkas_g_d</title>
+    <title>Farmers' square</title>
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <meta name="description" content="" />
     <meta name="keywords" content="" />
-    <!--[if lte IE 8]><script src="css/ie/html5shiv.js"></script><![endif]-->
-    <script src="js/jquery.min.js"></script>
-    <script src="js/jquery.dropotron.min.js"></script>
-    <script src="js/skel.min.js"></script>
-    <script src="js/skel-layers.min.js"></script>
-    <script src="js/init.js"></script>
+    <!--[if lte IE 8]><script src="http://localhost:8080/css/ie/html5shiv.js"></script><![endif]-->
+    <script src="http://localhost:8080/js/jquery.min.js"></script>
+    <script src="http://localhost:8080/js/jquery.dropotron.min.js"></script>
+    <script src="http://localhost:8080/js/skel.min.js"></script>
+    <script src="http://localhost:8080/js/skel-layers.min.js"></script>
+    <script src="http://localhost:8080/js/init.js"></script>
     <noscript>
-        <link rel="stylesheet" href="css/skel.css" />
-        <link rel="stylesheet" href="css/style.css" />
-        <link rel="stylesheet" href="css/style-desktop.css" />
+        <link rel="stylesheet" href="http://localhost:8080/css/skel.css" />
+        <link rel="stylesheet" href="http://localhost:8080/css/style.css" />
+        <link rel="stylesheet" href="http://localhost:8080/css/style-desktop.css" />
     </noscript>
-    <!--[if lte IE 8]><link rel="stylesheet" href="css/ie/v8.css" /><![endif]-->
-    <link rel="stylesheet" href="css/custom.css" />
+    <!--[if lte IE 8]><link rel="stylesheet" href="http://localhost:8080/css/ie/v8.css" /><![endif]-->
+    <link rel="stylesheet" href="http://localhost:8080/css/custom.css" />
 </head>
 <body>
 
