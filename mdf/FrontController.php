@@ -80,10 +80,21 @@ class FrontController {
 
         $inputData->setPost($this->_router->getPost());
         //var_dump($router_cache);
+        //var_dump($inputData->post('form'));
         // TODO fix the situation when method or controller does not exist
         $controller_to_load = $this->_ns.'\\' . ucfirst($this->_controller);
         //echo $controller_to_load;
-        $newController = new $controller_to_load;
+        try {
+            $newController = new $controller_to_load();
+        } catch(\Exception $ex) {
+            echo $ex->getMessage();
+            switch($ex->getMessage()) {
+                case 'Cannot include file!': header("Location: /"); break;
+                default: \MDF\App::getInstance()->displayError(404);
+            }
+            exit;
+        }
+
         //var_dump($newController);
         //var_dump($this->_params);exit;
         if(count($this->_params) > 0) {
