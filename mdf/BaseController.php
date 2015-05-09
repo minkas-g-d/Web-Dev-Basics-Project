@@ -31,4 +31,8 @@ class BaseController {
         $this->config = $this->app->getConfig();
         $this->input = \MDF\InputData::getInstance();
     }
+
+    public function __call($a, $b) {
+        $this->index();
+    }
 }

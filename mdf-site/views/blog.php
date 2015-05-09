@@ -10,10 +10,10 @@
 <!--                            <a href="http://localhost:8080/post/view/--><?//=$post['id']?><!--" class="image featured"><img src="http://localhost:8080/images/pic--><?//=($k+1)?><!--.jpg" alt="" /></a>-->
                             <div class="inner">
                                 <header>
-                                    <h2><a href="http://localhost:8080/posts/view/<?=$post['id']?>"><?=$post['title']?></a></h2>
+                                    <h2><a href="http://localhost:8080/posts/view/<?=$post['id']?>"><?=htmlspecialchars($post['title'])?></a></h2>
                                     <p><small><?=$post['username']?> | <?=$post['post_date']?></small></p>
                                 </header>
-                                <p><?=$post['excerpt']?></p>
+                                <p><?=htmlspecialchars($post['excerpt'])?></p>
                             </div>
                         </section>
 

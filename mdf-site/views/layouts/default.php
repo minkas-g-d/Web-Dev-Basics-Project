@@ -11,6 +11,10 @@
     <script src="http://localhost:8080/js/skel.min.js"></script>
     <script src="http://localhost:8080/js/skel-layers.min.js"></script>
     <script src="http://localhost:8080/js/init.js"></script>
+
+    <script src="http://localhost:8080/js/jquery.noty.js"></script>
+    <script src="http://localhost:8080/js/utilities.js"></script>
+    <script src="http://localhost:8080/js/custom.js"></script>
     <noscript>
         <link rel="stylesheet" href="http://localhost:8080/css/skel.css" />
         <link rel="stylesheet" href="http://localhost:8080/css/style.css" />
@@ -38,12 +42,12 @@
                         <a href="">User Actions</a>
                         <ul>
                             <li><a href="#">Users list</a></li>
-                            <li><a href="#">Add post</a></li>
+                            <li><a href="http://localhost:8080/user/index/add-post">Add post</a></li>
                         </ul>
                     </li>
-                    <li><a href="#">Login</a></li>
+                    <li><a href="">Login</a></li>
                     <li><a href="#">Register</a></li>
-                    <li><a href="#">Logout</a></li>
+                    <li><a id="logout" href="#">Logout</a></li>
                 </ul>
             </nav>
 

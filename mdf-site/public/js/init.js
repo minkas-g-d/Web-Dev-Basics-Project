@@ -42,7 +42,7 @@
 			}
 		}
 	});
-    console.log(skel);
+
 	$(function() {
 
 		var	$window = $(window),

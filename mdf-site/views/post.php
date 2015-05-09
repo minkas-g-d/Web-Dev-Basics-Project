@@ -5,10 +5,10 @@
             <!-- Content -->
             <article>
 
-                <h2><?=$this->post['title']?></h2>
+                <h2><?=htmlspecialchars($this->post['title'])?></h2>
                 <small>by <?=$this->post['username']?> | <?=$this->post['post_date']?></small>
 
-                <div><?=$this->post['content']?></div>
+                <div><?=htmlentities($this->post['content'])?></div>
 
             </article>
 

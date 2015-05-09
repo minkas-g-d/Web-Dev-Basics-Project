@@ -2,3 +2,9 @@
     width: 100%;
     margin-bottom: 0.5em;
 }
+.mdf-no-float {
+    clear: both;
+}
+.mdf-center {
+    margin: 0 auto;
+}
