@@ -23,7 +23,10 @@ $cnf['*']['controllers']['user']['methods']['add-post'] = 'renderAddPost';
 $cnf['*']['controllers']['user']['methods']['new-post'] = 'addPost';
 
 
-$cnf['*']['controllers']['user']['methods']['register'] = 'register';
-$cnf['*']['controllers']['user']['methods']['login'] = 'login';
+$cnf['*']['controllers']['user']['methods']['register'] = 'renderRegister';
+$cnf['*']['controllers']['user']['methods']['new'] = 'register';
+
+$cnf['*']['controllers']['user']['methods']['login'] = 'renderLogin';
+$cnf['*']['controllers']['user']['methods']['signin'] = 'renderLogin';
 
 return $cnf;
