@@ -1,8 +1,8 @@
 <?php
 
-namespace Controllers\User;
+namespace Controllers;
 
-class Index extends \MDF\BaseController {
+class User extends \MDF\BaseController {
 
     public function index() {
         echo 'User profile';
