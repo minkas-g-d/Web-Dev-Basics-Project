@@ -46,7 +46,6 @@ class App {
             $this->_frontController->setRouter(new \MDF\Routers\DefaultRouter());
         }
 
-
         $sess = $this->_config->app['session'];
         // Check if we should start session right away
         if($sess['autostart']) {

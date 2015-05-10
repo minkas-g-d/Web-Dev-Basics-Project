@@ -16,10 +16,6 @@ class FrontController {
 
     // loads specific controller and method provided in URI
     public function dispatch() {
-        // Move router initialization in App class
-        // to give chance to choose different routers for the framework
-        //$test = new \MDF\Routers\DefaultRouter();
-        //$uri = $test->getURI();
 
         if($this->_router == null) {
             throw new \Exception('Router not provided!');
@@ -28,6 +24,7 @@ class FrontController {
         $uri = $this->_router->getURI();
 
         $routes = \MDF\App::getInstance()->getConfig()->routes;
+        //print_r($routes);
 
         $router_cache = null;
         if(is_array($routes) && count($routes) > 0) {
@@ -80,10 +77,9 @@ class FrontController {
 
         $inputData->setPost($this->_router->getPost());
         //var_dump($router_cache);
-        //var_dump($inputData->post('form'));
         // TODO fix the situation when method or controller does not exist
         $controller_to_load = $this->_ns.'\\' . ucfirst($this->_controller);
-        //echo $controller_to_load;
+
         try {
             $newController = new $controller_to_load();
         } catch(\Exception $ex) {
@@ -95,8 +91,6 @@ class FrontController {
             exit;
         }
 
-        //var_dump($newController);
-        //var_dump($this->_params);exit;
         if(count($this->_params) > 0) {
             $newController->{$this->_method}($this->_params);
         } else {

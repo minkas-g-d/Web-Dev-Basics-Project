@@ -38,6 +38,7 @@ final class Loader {
     }
 
     public static function registerNamespace($namespace, $path) {
+        //echo $namespace . ' ' . $path . '<br>';
         $namespace = trim($namespace);
 
         if(strlen($namespace) > 0) {
