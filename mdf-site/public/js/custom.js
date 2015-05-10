@@ -126,9 +126,9 @@
 
     function clearFields() {
         if($('input')) {
-            $('input[name=text]').val('');
-            $('input[name=password]').val('');
-            $('input[name=email]').val('');
+            $('input[type=text]').val('');
+            $('input[type=password]').val('');
+            $('input[type=email]').val('');
         }
 
         if($('textarea')) {
