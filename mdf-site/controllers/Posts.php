@@ -8,13 +8,20 @@ class Posts extends \MDF\BaseController {
     public function index() {
         $postsModel = new \Models\Posts();
         $posts = $postsModel->listPartialInfo();
+        $session = $this->app->getSession();
 
         $this->view->appendToLayout('body', 'blog');
-        $this->view->display('layouts.default', array('posts' => $posts));
+        $this->view->display('layouts.default',
+            array(
+                'posts' => $posts,
+                'is_logged' => $this->isLogged(),
+                'uname' => $session->uname,
+                'nav' => 'all-posts'
+            )
+        );
     }
 
     public function view($args = null) {
-        //var_dump($args);
         if($args == null) {
             $this->index(); exit;
         }
@@ -30,7 +37,7 @@ class Posts extends \MDF\BaseController {
             }
 
             $this->view->appendToLayout('body', 'post');
-            $this->view->display('layouts.default', array('post' => $post));
+            $this->view->display('layouts.default', array('post' => $post, 'is_logged' => $this->isLogged()));
 
         } catch(\Exception $ex) {
             \MDF\App::getInstance()->displayError(404); exit();
