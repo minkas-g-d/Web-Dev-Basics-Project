@@ -20,7 +20,7 @@
                 'content': content
             };
 
-            $.post('/user/index/new', params, function(data) {
+            $.post('/user/index/new-post', params, function(data) {
 
                 var data = $.parseJSON(data);
                 //console.log(data);
@@ -31,6 +31,38 @@
                     utilities.notify('error', data.error);
                 }
             });
+        });
+
+        $('#register').on('click', function(){
+            var uname = $('#uname').val().trim();
+            var upass = $('#upass').val().trim();
+            var upconfirm = $('#upass-confirm').val().trim();
+            var fname = $('#fname').val().trim();
+            var lname = $('#lname').val().trim();
+
+            if(!uname) {
+                utilities.notify('warning', 'Username MUST NOT be empty!'); return;
+            }
+            if(!upass) {
+                utilities.notify('warning', 'Password MUST NOT be empty!'); return;
+            }
+            if(!upconfirm) {
+                utilities.notify('warning', 'Reenter password!'); return;
+            }
+            if(upass !== upconfirm) {
+                utilities.notify('warning', 'Passwords does not match!'); return;
+            }
+
+            var params = {
+                uname: uname,
+                upass: upass,
+                upconfirm: upconfirm,
+                fname: fname,
+                lname: lname
+            }
+
+            console.log(params);
+
         });
 
         $('#logout').on('click', function(e) {
