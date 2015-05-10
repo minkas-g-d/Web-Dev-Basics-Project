@@ -17,7 +17,7 @@ class Validator {
 
         if(count($this->_rules) > 0) {
             foreach($this->_rules as $rule) {
-                if(!$rule['rule']($rule['val'], $rule['params'])) {
+                if(!$this->$rule['rule']($rule['val'], $rule['params'])) {
                     if($rule['errorName']) {
                         $this->_errors[] = $rule['errorName'];
                     } else {
@@ -50,12 +50,20 @@ class Validator {
         return $value1 == $value2;
     }
 
-    public static function minlength($value, $minlegth) {
+    public static function matchesStrict($value1, $value2) {
+        return $value1 === $value2;
+    }
+
+    public static function minLength($value, $minlegth) {
         return (mb_strlen($value) >= $minlegth);
     }
 
-    public static function maxlength($val1, $val2) {
+    public static function maxLength($val1, $val2) {
         return (mb_strlen($val1) <= $val2);
+    }
+
+    public static function alphadash($val1) {
+        return (bool) preg_match('/^([a-z-\s])+$/i', $val1);
     }
 
     public static function alphanumdash($val1) {
@@ -68,5 +76,9 @@ class Validator {
 
     public static function numeric($val1) {
         return is_numeric($val1);
+    }
+
+    public static function passValidation($pass, $truePass) {
+        return password_verify($pass, $truePass);
     }
 }

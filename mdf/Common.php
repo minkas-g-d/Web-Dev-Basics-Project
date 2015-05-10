@@ -85,6 +85,10 @@ class Common {
         return $text;
     }
 
+    public static function hashPass($pass, $hash = PASSWORD_BCRYPT) {
+        return password_hash($pass, $hash);
+    }
+
     public static function headerStatus($code) {
         $codes = array(
             100 => 'Continue',

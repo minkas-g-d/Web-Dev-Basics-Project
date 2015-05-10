@@ -4,7 +4,7 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 CREATE TABLE IF NOT EXISTS `mdf_users` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `username` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `pass_hash` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `pass_hash` varchar(60) COLLATE utf8mb4_unicode_ci NOT NULL,
   `is_admin` bit(1) NOT NULL DEFAULT b'0', 
   `firstname` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
   `lastname` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,

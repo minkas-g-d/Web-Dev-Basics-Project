@@ -42,11 +42,11 @@
                         <a href="">User Actions</a>
                         <ul>
                             <li><a href="#">Users list</a></li>
-                            <li><a href="http://localhost:8080/user/index/add-post">Add post</a></li>
+                            <li><a href="http://localhost:8080/user/add-post">Add post</a></li>
                         </ul>
                     </li>
-                    <li><a href="">Login</a></li>
-                    <li><a href="#">Register</a></li>
+                    <li><a href="http://localhost:8080/user/login">Login</a></li>
+                    <li><a href="http://localhost:8080/user/register">Register</a></li>
                     <li><a id="logout" href="#">Logout</a></li>
                 </ul>
             </nav>

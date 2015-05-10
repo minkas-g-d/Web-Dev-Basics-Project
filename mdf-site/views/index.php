@@ -14,8 +14,8 @@
                     </div>
                     <div class="4u">
                         <ul>
-                            <li><a href="/login" class="button big icon fa-arrow-circle-right mdf-full-width">Login</a></li>
-                            <li><a href="/register" class="button big alt icon fa-arrow-circle-right mdf-full-width">Register</a></li>
+                            <li><a href="http://localhost:8080/user/login" class="button big icon fa-arrow-circle-right mdf-full-width">Login</a></li>
+                            <li><a href="http://localhost:8080/user/register" class="button big alt icon fa-arrow-circle-right mdf-full-width">Register</a></li>
                         </ul>
                     </div>
                 </div>
