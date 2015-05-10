@@ -7,7 +7,7 @@ class User extends \MDF\BaseModel {
 
     public function addUser($uname, $upass, $email, $fname='', $lname='') {
 
-        if($this->getUserByUname($uname)[0] == 1) {
+        if($this->checkUserExists($uname)[0] == 1) {
             throw new \Exception('Username not available!');
         }
         $hashedPass = \MDF\Common::hashPass($upass);
@@ -22,13 +22,21 @@ class User extends \MDF\BaseModel {
 
     }
 
-    public function getUserByUname($uname) {
+    public function checkUserExists($uname) {
         $result = $this->db->prepare('SELECT * FROM mdf_users WHERE username=?', array($uname))
             ->execute()->fetchRowNum();
-        //var_dump($result); exit;
+
         if($result != false && $result[0] > 1) {
             throw new \Exception('There is more than one user with username '.$uname.'.');
         }
+
+        return $result;
+    }
+
+    public function getUserByName($uname) {
+        $result = $this->db->prepare('SELECT id, username, pass_hash, firstname, lastname, email
+            FROM mdf_users
+            WHERE username=?', array($uname))->execute()->fetchRowAssoc();
 
         return $result;
     }

@@ -47,4 +47,33 @@ class Posts extends \MDF\BaseModel {
 
     }
 
+    public function changePostState($authorId, $postId, $newState) {
+
+        if(in_array($newState, array('published', 'draft', 'deleted'))) {
+            if($this->checkPostPossession($authorId, $postId)) {
+                $result = $this->db->prepare("UPDATE mdf_posts
+                  SET post_status=?, post_modified=?
+                  WHERE id=?",
+                    array($newState, date('Y-m-d H:i:s'), $postId))->execute()->getAffectedRows();
+
+                if($result === 0) {
+                    throw new \Exception('Could not delete post!');
+                }
+
+            } else {
+                throw new \Exception('Cannot delete others posts!');
+            }
+
+        } else {
+            throw new \Exception('No such state: ' . $newState);
+        }
+
+    }
+
+    public function checkPostPossession($uid, $postId) {
+        return (bool) $this->db->prepare("SELECT id FROM mdf_posts WHERE author_id = ? AND id = ?",
+            array($uid, $postId))->execute()->fetchRowNum();
+    }
+
+
 }
