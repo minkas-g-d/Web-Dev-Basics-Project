@@ -20,7 +20,6 @@ class NativeSession implements \MDF\Session\ISession {
 
     public function __get($name)
     {
-        // TODO: Implement __get() method.
         return $_SESSION[$name];
     }
 

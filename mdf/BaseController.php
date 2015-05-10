@@ -35,4 +35,12 @@ class BaseController {
     public function __call($a, $b) {
         $this->index();
     }
+
+    public function isLogged() {
+        $session = $this->app->getSession();
+        if($session->is_logged == null) {
+            return false;
+        }
+        return true;
+    }
 }

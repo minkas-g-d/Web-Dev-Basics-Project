@@ -24,7 +24,6 @@
     <link rel="stylesheet" href="http://localhost:8080/css/custom.css" />
 </head>
 <body>
-
     <!-- Header -->
     <div id="header-wrapper">
         <header id="header" class="container">
@@ -37,17 +36,21 @@
             <!-- Nav -->
             <nav id="nav">
                 <ul>
-                    <li class="current"><a href="/">Home</a></li>
-                    <li>
-                        <a href="">User Actions</a>
-                        <ul>
-                            <li><a href="#">Users list</a></li>
-                            <li><a href="http://localhost:8080/user/add-post">Add post</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="http://localhost:8080/user/login">Login</a></li>
-                    <li><a href="http://localhost:8080/user/register">Register</a></li>
-                    <li><a id="logout" href="#">Logout</a></li>
+                    <li class="<?=($this->nav == 'home')? 'current': ''?>"><a href="/">Home</a></li>
+                    <li class="<?=($this->nav == 'all-posts')? 'current': ''?>"><a href="http://localhost:8080/posts/view">All Posts</a></li>
+                    <?php if($this->is_logged) { ?>
+                        <li class="<?=($this->nav == 'add-post')? 'current': ''?>">
+                            <a href="">User Actions</a>
+                            <ul>
+<!--                                <li><a href="#">Users list</a></li>-->
+                                <li class="<?=($this->nav == 'add-post')? 'current': ''?>"><a href="http://localhost:8080/user/add-post">Add post</a></li>
+                            </ul>
+                        </li>
+                        <li><a id="logout" href="#">Logout</a></li>
+                    <?php } else { ?>
+                        <li class="<?=($this->nav == 'login')? 'current': ''?>"><a href="http://localhost:8080/user/login">Login</a></li>
+                        <li class="<?=($this->nav == 'register')? 'current': ''?>"><a href="http://localhost:8080/user/register">Register</a></li>
+                    <?php } ?>
                 </ul>
             </nav>
 
